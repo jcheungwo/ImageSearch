@@ -26,10 +26,10 @@ export const fetchAddImages = (search, page) => {
   }
 }
 
-export const fetchNewSearch = (search, page) => {
+export const fetchNewSearch = (search) => {
   return function(dispatch) {
     let searchRequest = search.split(' ').join('+')
-    let searchURL = `${searchRequest}&image_type=photo&pretty=true&page=${page}`
+    let searchURL = `${searchRequest}&image_type=photo&pretty=true`
     axios.get(`http://pixabay.com/api/?key=8118928-e3af9d4a6e7f2178b3811919d&q=${searchURL}`)
     .then(res => res.data)
     .then(images => dispatch(newSearch(images)))
