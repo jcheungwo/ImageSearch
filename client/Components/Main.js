@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import SearchBar from 'react-native-searchbar'
-import InfiniteScrollView from 'react-native-infinite-scroll-view';
+import {SearchBar, Button} from 'react-native-elements'
  
 export default class Main extends Component {
 
@@ -25,12 +23,15 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SearchBar 
-          ref='searchBar'
+        <Text>Pixelbay Image Lookup</Text>
+        <SearchBar
+          containerStyle={styles.searchBar}
           placeholder='Search for an Image'
-          handleChangeText={(currentSearch) => this.setState({currentSearch})}
-          onSubmitEditing={() => this.handleSubmit()}
-          showOnLoad
+          onChangeText={(currentSearch) => this.setState({currentSearch})}
+        />
+        <Button
+          title='Search'
+          onPress={() => this.handleSubmit()}      
         />
       </View>
     )
@@ -44,6 +45,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
+  searchBar: {
+    margin: 10,
+    width: '70%'
+  }
 });

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { ActivityIndicator, FlatList, Text, View, Modal, Image, StyleSheet } from "react-native";
-import { List, ListItem } from "react-native-elements";
-import { Button } from 'react-native-elements'
-import ModalView from './modal'
+import { ActivityIndicator, FlatList, Text, View, Modal, StyleSheet } from "react-native";
+import { List, ListItem, Button } from "react-native-elements";
+import DetailView from './detailView'
 
 export default class Results extends Component {
 
@@ -55,20 +54,22 @@ export default class Results extends Component {
   }
 
   render() {
-    if(this.state.currentPhoto) console.log(this.state.currentPhoto.previewURL)
     return (
       <View style={styles.container}>
-        <Button
-          title='New Search'
-          onPress={() => (this.props.navigation.navigate('Main'))}
-        />
+        <View style={styles.header}>
+          <Button
+            title='New Search'
+            onPress={() => (this.props.navigation.navigate('Main'))}
+          />
+          <Text>Search Results for {this.state.search}</Text>
+          <Text> </Text>
+        </View>
         <List>
           <FlatList
             data={this.state.data}
             keyExtractor={(x, i) => i}
             onEndReached={() => this.handleEnd()}
-            onEndReachedThreshold={1}
-            legacyImplementation
+            onEndReachedThreshold={10}
             ListFooterComponent={() =>
               this.state.end
                 ? null
@@ -91,7 +92,7 @@ export default class Results extends Component {
           <View style={styles.container}>
             {this.state.currentPhoto 
               && 
-              <ModalView closeModal={this.closeModal} photo={this.state.currentPhoto}/>
+              <DetailView closeModal={this.closeModal} photo={this.state.currentPhoto}/>
             }
           </View>
         </Modal>
@@ -108,9 +109,10 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%'
   },
-  newSearch: {
-    flexDirection: 'column',
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    margin: 10
   }
 });

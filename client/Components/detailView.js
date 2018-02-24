@@ -17,6 +17,7 @@ export default class ModalView extends Component {
             <Text>Tags: {photo.tags}</Text>
           </View>
           <Button
+            style={styles.button}
             title='Return to Search Results'
             onPress={closeModal}
           />
@@ -32,10 +33,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    height: '100%'
   },
   image: {
     height:150,
     width:150,
     margin:10,
   },
+  button: {
+    margin:10
+  }
 });
